@@ -1,0 +1,39 @@
+[a2-seguridad] editor y API de administracion DESHABILITADOS (falta NODE_RED_ADMIN_USER y NODE_RED_ADMIN_HASH); flujos, dashboard, /a2/planta/* e ingesta siguen. Ver ./prepara_admin.sh
+17 Nov 17:50:30 - [info] 
+
+Welcome to Node-RED
+===================
+
+17 Nov 17:50:30 - [info] Node-RED version: v5.0.9
+17 Nov 17:50:30 - [info] Node.js  version: v22.23.3
+17 Nov 17:50:30 - [info] Darwin 27.0.0 arm64 LE
+17 Nov 17:50:30 - [info] Loading palette nodes
+17 Nov 17:50:31 - [info] Settings file  : /Users/ariarinunezm/dev aws/dev/IoT/node-red/settings.js
+17 Nov 17:50:31 - [info] Context store  : 'default' [module=memory]
+17 Nov 17:50:31 - [info] User directory : /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/actividad1-pruebas/userdir
+17 Nov 17:50:31 - [warn] Projects disabled : editorTheme.projects.enabled=false
+17 Nov 17:50:31 - [info] Flows file     : /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/actividad1-pruebas/userdir/flows.json
+17 Nov 17:50:31 - [info] Admin UI disabled
+17 Nov 17:50:31 - [info] Server now running at http://127.0.0.1:1881
+17 Nov 17:50:31 - [warn] 
+
+---------------------------------------------------------------------
+Your flow credentials file is encrypted using a system-generated key.
+
+If the system-generated key is lost for any reason, your credentials
+file will not be recoverable, you will have to delete it and re-enter
+your credentials.
+
+You should set your own key using the 'credentialSecret' option in
+your settings file. Node-RED will then re-encrypt your credentials
+file using your chosen key the next time you deploy a change.
+---------------------------------------------------------------------
+
+17 Nov 17:50:31 - [warn] Encrypted credentials not found
+17 Nov 17:50:31 - [info] Starting flows
+17 Nov 17:50:31 - [info] [ui-base:A2 Station] Node-RED Dashboard 2.0 (v1.34.0) started at /dashboard
+17 Nov 17:50:31 - [info] [ui-base:A2 Station] Created socket.io server bound to Node-RED port at path /dashboard/socket.io
+17 Nov 17:50:31 - [info] Started flows
+17 Nov 17:50:32 - [warn] [function:arma login] login omitido: falta FIREBASE_API_KEY / FB_INGESTOR_EMAIL / FB_INGESTOR_PASS. Se usara FIREBASE_AUTH si existe.
+17 Nov 17:59:10 - [info] Stopping flows
+17 Nov 17:59:10 - [info] Stopped flows

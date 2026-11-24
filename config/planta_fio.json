@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "estado": "cliente para Factory I/O, Sorting by Weight en Parallels (10.211.55.3:502). Umbrales 9.0 / 14.0 kg (4.5 / 7.0 V a 2 kg por volt) de pesos asentados. Ruedas: send_forward es la motriz, send_left/send_right orientan. Pesaje con las bandas detenidas; una peticion Modbus a la vez. prueba_fio.py cliente: 53/53 y 51/51 cajas por su salida; at_right_entry llego a 0.25 s encendido, debajo de t_min 0.30 s con sondeo 50 ms",
+  "actuador": "desviador",
+  "roles": {
+    "entrada": "at_scale_entry",
+    "fin_bascula": "at_scale_exit",
+    "peso": "weight",
+    "velocidad": null,
+    "emisor": null,
+    "alimentacion": [
+      "entry_conveyor",
+      "load_scale",
+      "left_conveyor",
+      "right_conveyor",
+      "front_conveyor"
+    ],
+    "alerta": null,
+    "en_bascula": "at_scale"
+  },
+  "desviador": {
+    "clases": [
+      {
+        "nombre": "light",
+        "hasta_kg": 9.0,
+        "salida": "send_left",
+        "confirma": "at_left_entry",
+        "destino": "left"
+      },
+      {
+        "nombre": "medium",
+        "hasta_kg": 14.0,
+        "salida": "send_forward",
+        "confirma": "at_forward_entry",
+        "destino": "forward"
+      },
+      {
+        "nombre": "heavy",
+        "hasta_kg": null,
+        "salida": "send_right",
+        "confirma": "at_right_entry",
+        "destino": "right"
+      }
+    ],
+    "motriz": "send_forward",
+    "purga_ms": 2500
+  },
+  "tablero": {
+    "start": {
+      "etiqueta": "start_button"
+    },
+    "stop": {
+      "etiqueta": "stop_button",
+      "nc": true,
+      "lecturas_para_cambio": 1
+    },
+    "emergencia": {
+      "etiqueta": "emergency_stop",
+      "nc": true
+    },
+    "luces": {
+      "en_marcha": "start_light",
+      "detenida": "stop_light",
+      "emergencia": "reset_light"
+    },
+    "contadores": {
+      "left": "left_count",
+      "forward": "forward_count",
+      "right": "right_count"
+    }
+  },
+  "sondeo_ms": 50,
+  "modbus_una_peticion": true,
+  "rtt_previsto_ms": 5,
+  "refresco_ms": 33,
+  "holgura_ms": 50,
+  "medido": {
+    "sondeo_ms": 50,
+    "periodo_p95_ms": 55,
+    "rtt_p95_ms": 9,
+    "refresco_p95_ms": 36.6,
+    "fuente": "periodo y rtt: CSV de sondeo de prueba_fio.py cliente (24 oct, 4699 ciclos con carga, una peticion a la vez; rtt = duracion de los ciclos de una peticion). refresco: cambios del registro weight leido cada 1.8 ms durante 90 s con cajas pasando (2393 intervalos dentro de tramos de cambio continuo; p50 33.4, p99 132.7 ms)"
+  },
+  "lecturas_por_ciclo_max": 2,
+  "escrituras_por_ciclo_max": 2,
+  "periodos_minimos": 3,
+  "lecturas_para_cambio": 2,
+  "comunicacion_timeout_ms": 2000,
+  "linea": {
+    "intervalo_emision_min_s": 1.908,
+    "t_pesada_a_confirmacion_s": 1.757,
+    "t_entrada_a_parada_s": 0.261,
+    "nota": "Limites de recorrido con tiempos medidos (17 nov 2026, paso H del cierre de la fase 4, docs/corrida_H.md): t_pesada_a_confirmacion_s = maximo de caja_pesada -> ts_salida del paso_caja (1.757 s, M1 caja 293) y t_entrada_a_parada_s = maximo de ts_entrada de caja_entra -> escritura que apaga entry_conveyor por pesaje (0.261 s, G caja 93), en 2086 cajas de las corridas L1, L2, M1, G e I, medidos con eventos del cliente. Se quitaron velocidad_fija_m_s (0.3), largo_caja_m (0.4), entrada_a_fin_bascula_m (1.2) y fin_bascula_a_confirmacion_m (0.9), que eran estimados: el manual no documenta la escala de la escena ni una velocidad nominal, asi que distancia y velocidad no se pueden separar. intervalo_emision_min_s medido el 17 nov (paso G, docs/corrida_G.md). Antes: intervalo_emision_min_s medido el 17 nov 2026 (paso G de la fase 4, docs/corrida_G.md): el menor intervalo entre caja_entra consecutivos con el cliente controlando la escena, en las corridas G (2.188 s), L1 (1.999 s), L2 (2.068 s) y M1 (1.908 s); el emisor de la escena dice 1 a 2 s. Siguen estimados velocidad_fija_m_s, largo_caja_m, entrada_a_fin_bascula_m y fin_bascula_a_confirmacion_m: el manual de Factory I/O no documenta la escala de las posiciones de la escena ni una velocidad nominal de banda (solo la maxima, 0.6 m/s en digital), asi que no hay con que pasar los tiempos medidos a metros. Antes: minimos de encendido y apagado medidos por el oraculo de prueba_fio.py cliente con A2-Planta controlando la escena (24 oct, 2 corridas de 4 min, 104 cajas): el peor de cada sensor. Velocidad y distancias aun estimadas",
+    "sensores": {
+      "at_scale_entry": {
+        "banda": "medida",
+        "encendido_min_s": 0.41,
+        "apagado_min_s": 0.55
+      },
+      "at_scale": {
+        "banda": "medida",
+        "encendido_min_s": 1.39,
+        "apagado_min_s": 0.46
+      },
+      "at_scale_exit": {
+        "banda": "medida",
+        "encendido_min_s": 0.51,
+        "apagado_min_s": 1.62
+      },
+      "at_left_entry": {
+        "banda": "medida",
+        "encendido_min_s": 0.46,
+        "apagado_min_s": 1.94
+      },
+      "at_forward_entry": {
+        "banda": "medida",
+        "encendido_min_s": 0.39,
+        "apagado_min_s": 7.29
+      },
+      "at_right_entry": {
+        "banda": "medida",
+        "encendido_min_s": 0.25,
+        "apagado_min_s": 1.54
+      }
+    }
+  },
+  "bascula": {
+    "plena_escala_kg": 20.0,
+    "banda_estable_V": 0.05,
+    "muestras_estables": 3,
+    "minimo_V": 0.2,
+    "nota": "bascula en su configuracion de 20 Kg Max. (escena guardada el 11 nov 2026, docs/EVIDENCIA_U0.md): 0-10 V = 0-20 kg, 2 kg por volt. Hasta el 11 nov se tomaba 1 V = 1 kg",
+    "pesaje_detenido": {
+      "detiene": [
+        "entry_conveyor"
+      ],
+      "separa": [
+        "load_scale"
+      ],
+      "separa_ms": 0,
+      "suelta": [
+        "load_scale"
+      ],
+      "reanuda_al_salir": [
+        "entry_conveyor"
+      ],
+      "espera_ms": 800,
+      "espera_max_ms": 2500,
+      "muestras": 3
+    }
+  },
+  "escenarios": [
+    {
+      "nombre": "parallels",
+      "sondeo_ms": 50,
+      "rtt_ms": 5,
+      "refresco_ms": 33,
+      "nota": "medido 24 oct: rtt mediana 1.4, p95 4.1 ms; refresco mediana 33 ms (~30 FPS)",
+      "usa_medido": true
+    },
+    {
+      "nombre": "parallels_30",
+      "sondeo_ms": 30,
+      "rtt_ms": 5,
+      "refresco_ms": 33
+    },
+    {
+      "nombre": "parallels_100",
+      "sondeo_ms": 100,
+      "rtt_ms": 5,
+      "refresco_ms": 33
+    },
+    {
+      "nombre": "azure_medido_24oct",
+      "sondeo_ms": 500,
+      "rtt_ms": 1890,
+      "refresco_ms": 1000
+    }
+  ]
+}

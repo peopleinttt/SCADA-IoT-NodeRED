@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "estado": "provisional: lo que el cliente supone de la linea; debe coincidir con la escena de Factory I/O (y con config/sustituto_a2.json mientras se use el sustituto)",
+  "actuador": "empujador",
+  "roles": {
+    "entrada": "sens_entrada",
+    "bascula": "sens_bascula",
+    "salida": "sens_salida",
+    "peso": "peso_V",
+    "velocidad": "vel_banda_V",
+    "emisor": "emisor_on",
+    "alimentacion": [
+      "alimentacion_on"
+    ],
+    "alerta": "luz_alerta",
+    "empujador": "emp_extender",
+    "lim_frontal": "emp_lim_frontal",
+    "lim_trasero": "emp_lim_trasero"
+  },
+  "sondeo_ms": 250,
+  "rtt_previsto_ms": 5,
+  "holgura_ms": 50,
+  "lecturas_por_ciclo_max": 2,
+  "escrituras_por_ciclo_max": 1,
+  "periodos_minimos": 3,
+  "lecturas_para_cambio": 2,
+  "comunicacion_timeout_ms": 2000,
+  "linea": {
+    "k_banda_m_s_por_V": 0.1,
+    "alimentacion_m_s": 0.18,
+    "intervalo_emision_min_s": 5.0,
+    "largo_caja_m": 0.4,
+    "entrada_a_fin_bascula_m": 1.4,
+    "bascula_a_empujador_m": 0.6,
+    "bascula_a_salida_m": 2.1,
+    "sensores": {
+      "sens_entrada": {
+        "banda": "alimentacion",
+        "largo_activo_m": 0.4
+      },
+      "sens_bascula": {
+        "banda": "alimentacion",
+        "largo_activo_m": 0.4
+      },
+      "sens_salida": {
+        "banda": "variable",
+        "largo_activo_m": 0.4
+      }
+    }
+  },
+  "bascula": {
+    "plena_escala_kg": 20.0,
+    "banda_estable_V": 0.03,
+    "muestras_estables": 3
+  },
+  "clasificacion": {
+    "masa_nominal_kg": 10.0,
+    "tolerancia_kg": 2.5
+  },
+  "empujador": {
+    "alcance_s": 0.25,
+    "carrera_s": 0.5,
+    "margen_s": 0.5
+  },
+  "escenarios": [
+    {
+      "nombre": "local",
+      "sondeo_ms": 250,
+      "rtt_ms": 5
+    },
+    {
+      "nombre": "azure",
+      "sondeo_ms": 500,
+      "rtt_ms": 200
+    }
+  ]
+}

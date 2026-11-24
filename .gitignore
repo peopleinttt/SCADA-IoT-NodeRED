@@ -1,0 +1,16 @@
+.env
+datos/*.csv
+datos/*.log
+datos/*.json
+datos/*.jsonl
+node-red/runtime/
+firebase/database.rules.generado.json
+**/.DS_Store
+pruebas/emulador/database.rules.json
+pruebas/emulador/firebase.json
+pruebas/emulador/*.log
+sketch.configurado.ino
+bin/
+tunel.url
+**/__pycache__/
+web/config_a2.js

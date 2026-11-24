@@ -1,0 +1,72 @@
+=== 0. Antes de grabar (Factory I/O en 10.211.55.3 por el relevo 127.0.0.1:5030) ===
+      planta: Modbus 127.0.0.1:5030 · mapa mapa_registros_fio.json · cliente planta_fio.json
+    
+      [32mOK[0m    limites factibles con sondeo 50 ms, rtt 5 ms, refresco 33 ms
+      [32mOK[0m    Modbus 127.0.0.1:5030 contesta: ida y vuelta min 0.8 mediana 2.0 p95 9.2 max 9.8 ms
+      [32mOK[0m    Firebase da sesion al ingestor (uid NCGRYv24iXc1BFSxD3RViIDeYRY2)
+      [32mOK[0m    Gemini: quedan 1 de 1 consultas de A2 hoy (A1 uso 0; cuota de Google ~20 de 20 por modelo)
+    
+      0 revisiones fallidas
+  OK    ./demo_a2.sh --revisa: limites factibles, Modbus contesta, sesion de Firebase
+=== 1. Arquitectura: ./demo_a2.sh (reinicia la escena por Modbus) ===
+      [32mOK[0m    escena reiniciada por Modbus: Reset, vacia y Run
+      [32mOK[0m    Node-RED arriba en el 1881
+      [32mOK[0m    A2-Planta: ok desviador factible
+      [32mOK[0m    grafica configurada (web/config_a2.js, cuenta del visor, no se versiona)
+    
+      HMI       http://localhost:1881/dashboard/a2
+                http://100.81.236.34:1881/dashboard/a2   (otro equipo de la tailnet)
+      Grafica   http://localhost:8123/proceso.html
+      Editor    http://localhost:1881/   (por el tunel publico da 403)
+      Guion     docs/DEMO_A2.md
+    
+      0 revisiones fallidas
+  OK    demo_a2.sh arranca todo sin fallas y reinicia la escena
+  OK    imprime las URL de la HMI y de la grafica
+=== 2. Factory I/O corriendo ===
+  OK    A2-Planta: com ok, desviador, factible con T_ef medido (55 ms)
+=== 3. HMI: marcha y paro ===
+  OK    la HMI abre y dice Online / Stopped
+  OK    Start -> 200
+  OK    Emitter ON -> 422 sin_emisor (la escena emite sola)
+  OK    comando rechazado visible: consigna con bandas fijas -> 422 velocidad_no_aplica
+=== 4. Cajas clasificadas (y vigila del paso 2) ===
+    destino     127.0.0.1:5030 unidad 1 durante 20 s
+    bloques     discretas 0..15, registros de entrada 0..0
+    vueltas     4938 (246.9 por segundo), 0 fallidas
+    ida y vuelta  min 0.3   mediana 1.7   p95 4.6   max 11.5   ms (9876 peticiones)
+    refresco    menor intervalo entre dos valores distintos de una misma entrada: 0.025 s
+      discreta 0 (at_scale_entry)     8 cambios, 3 pulsos en 1: lecturas min 894 / mediana 983 / max 1213, segundos min 3.63 / max 4.74, intervalo minimo 0.601 s / mediana 1.016 s
+  OK    sonda vigila ve cambiar sensores con la linea en marcha
+  OK    la HMI cuenta cajas clasificadas por destino y 0 perdidas
+    HMI: {'boxesOut': 8, 'perMinute': 8, 'byDestination': {'left': 6, 'forward': 1, 'right': 1}, 'lastBox': {'id': 8, 'massKg': 2.98, 'destination': 'left', 'ts': '2026-11-17T21:36:35.928Z'}}
+=== 5. Registros llegando a Firebase ===
+  OK    la HMI dice que la nube esta encendida y muestra el ultimo registro aceptado
+    ultimo aceptado: {'ts': '2026-11-17T15:36:35.956-06:00', 'kind': 'box', 'id': '-P6fRAeMZ5HEQLkFU9E2'}
+=== 6. Grafica en vivo (visor real, sin recargar) ===
+  OK    http://localhost:8123/proceso.html se sirve (200)
+  FALLA la grafica lee como visor real y sube sin recargar ([] -> [] cajas, [] navegaciones) None
+=== 7. Diagnostico ===
+  OK    la HMI vuelve a abrir (Online)
+    a2_diagnosticos: ['2026-11-17T21:36:42.348Z;hmi;gemini-3.1-flash-lite;1252;valido;;normal;mantener;;432']
+    modelo gemini-3.1-flash-lite, latencia 1252 ms, nivel normal, accion mantener
+    texto: The system is operating normally with 9 boxes sorted and 0 lost. The 3-way wheel diverter is functioning correctly across all destinations. The mean mass is 7.88 kg with a standard deviation of 3.69 kg, indicating stable processing within the 46-second runtime.
+    justificacion: All performance metrics are within expected operational parameters with zero errors or misrouted items reported.
+  OK    una consulta real: una sola fila con respuesta del modelo, valida, y la HMI la muestra
+    espera 63 s para que el limitador de 1 por minuto no descarte la segunda pulsacion
+  OK    la segunda pulsacion se detiene en el tope diario: sigue habiendo una sola fila (ninguna salida a la red) y la HMI muestra el mismo diagnostico valido
+  OK    en los 30 s siguientes al diagnostico no hay ningun comando (0)
+  OK    la pestana de diagnostico de la Actividad 1 no consulto (sin diagnosticos_*.csv: [])
+=== 8. Estado seguro: desconexion y recuperacion ===
+  OK    la HMI dice NO COMMUNICATION en 2.0 s (< timeout_com_ms + 1 s)
+  OK    Start -> 409 sin_comunicacion en pantalla
+  OK    al volver: Online y Stopped, sin reanudar sola
+  OK    eventos: reconexion_inicia, 8 escrituras seguras (bandas y ruedas) en orden, reconexion_completa
+  OK    Start vuelve a funcionar
+=== 9. Cierre ===
+  OK    ./demo_a2.sh --apaga deja libres el 1881 y el 8123
+
+Bloqueados: 0
+
+=== RESULTADO: 23 correctas, 1 fallidas ===
+exit 1

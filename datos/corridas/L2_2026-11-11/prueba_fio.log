@@ -1,0 +1,62 @@
+=== A2-Planta contra Factory I/O (Node-RED -> 10.211.55.3:502; oraculo por 10.211.55.3:502; datos en /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/a2_fio_cliente_t_7u7_z7) ===
+    reinicio de la escena en 10.211.55.3:502 (unidad 1)
+        0.0 s  11 bobinas de actuadores en 0
+        0.1 s  Reset = 1 -> running 0
+        0.5 s  Reset = 0
+        0.5 s  vacia: bascula, desviador, ramas y salidas libres, peso < 0.2 V
+        2.3 s  Run = 1 (se queda) -> running 1, sostenido 1 s
+  OK    escena reiniciada por Modbus: Reset, vacia y Run (codigo 0)
+  OK    A2-Planta conecta con la escena (com ok)
+  OK    limites factibles con sondeo 50 ms (T_ef 55 ms)
+  OK    marcha -> 200
+    ... 25 cajas fuera
+    ... 50 cajas fuera
+    ... 75 cajas fuera
+    ... 100 cajas fuera
+    ... 125 cajas fuera
+    ... 150 cajas fuera
+    ... 175 cajas fuera
+    ... 200 cajas fuera
+    ... 225 cajas fuera
+    ... 250 cajas fuera
+    ... 275 cajas fuera
+    ... 300 cajas fuera
+    ... 325 cajas fuera
+    ... 350 cajas fuera
+    ... 375 cajas fuera
+    ... 400 cajas fuera
+    ... 425 cajas fuera
+    ... 450 cajas fuera
+    ... 475 cajas fuera
+    ... 500 cajas fuera
+    ... 525 cajas fuera
+    ... 550 cajas fuera
+    ... 575 cajas fuera
+    ... 600 cajas fuera
+    oraculo: 601 cajas soltadas, 600 salidas NC; cliente: 601 pasos
+    por destino (cliente): {'left': 353, 'forward': 144, 'right': 104} | purgadas 0
+  OK    al menos 15 cajas clasificadas en 4920 s (600)
+  OK    cada caja sale por la salida de su peso (oraculo): 600 de 600 (0 sin peso del oraculo)
+  OK    las tres salidas se usan
+  OK    el cliente reporta el mismo destino que la salida real, caja por caja (600)
+    cajas que el oraculo vio moverse al soltarlas (cliente, oraculo, variacion): [(3.49, 3.49, 0.06), (7.5, 7.5, 0.07), (7.49, 7.49, 0.09), (3.49, 3.49, 0.09), (7.49, 7.49, 0.07), (5.82, 5.83, 0.09), (5.68, 5.69, 0.07), (6.53, 6.52, 0.37), (9.8, 9.81, 0.22), (7.18, 7.18, 0.13), (4.82, 4.82, 0.26), (7.5, 7.5, 0.11), (5.73, 5.73, 0.09), (4.51, 4.51, 0.17), (4.27, 4.25, 0.24), (6.78, 6.79, 0.32), (3.49, 3.49, 0.08), (8.69, 8.66, 1.11), (7.49, 7.5, 0.08), (7.49, 7.49, 0.06), (7.5, 7.51, 0.31), (7.68, 7.67, 0.15), (7.49, 7.49, 0.56), (8.74, 8.75, 0.8), (5.66, 5.66, 0.17), (7.5, 7.5, 0.06), (6.25, 6.25, 0.7), (7.5, 7.5, 0.22), (6.21, 6.21, 0.17), (7.49, 7.49, 0.1), (3.49, 3.49, 0.07), (7.48, 7.48, 0.34), (3.49, 3.49, 0.06), (7.5, 7.5, 1.55), (6.19, 6.19, 0.41), (9.27, 9.22, 0.16), (9.29, 9.28, 0.76), (4.92, 4.92, 0.37), (7.75, 7.71, 0.29), (5.98, 5.74, 0.26), (4.73, 4.73, 0.12)]
+  OK    pesos del cliente = pesos del oraculo (+-0.05 V) en las 559 cajas quietas
+  OK    y la misma clase en todas las que el oraculo peso (600)
+  OK    ninguna caja se cae ni se atora: 598 soltadas con mas de 12 s antes del paro, 600 salidas
+  OK    600 cajas por la salida de su peso (600)
+  OK    T_ef sale de lo medido (55 ms, medido)
+  OK    cada pulso de los sensores de rama visto en al menos 3 lecturas {'at_left_entry': 9, 'at_forward_entry': 7, 'at_right_entry': 9}
+  OK    sin desvios erroneos, perdidas ni fantasmas (0 / 0 / 0)
+    tiempos bajo control (oraculo, s) contra t_min 0.17 s:
+      at_scale_entry    encendido min 0.43  apagado min 0.55  (600 pulsos)
+      at_scale          encendido min 1.45  apagado min 0.52  (601 pulsos)
+      at_scale_exit     encendido min 0.45  apagado min 1.41  (600 pulsos)
+      at_left_entry     encendido min 0.44  apagado min 1.75  (353 pulsos)
+      at_forward_entry  encendido min 0.37  apagado min 1.58  (144 pulsos)
+      at_right_entry    encendido min 0.42  apagado min 1.58  (103 pulsos)
+  OK    bajo control, todo sensor seguido dura al menos t_min encendido y apagado
+    lecturas minimas por pulso (cliente): {'at_scale_entry': 8, 'at_scale': 29, 'at_scale_exit': 9, 'at_left_entry': 9, 'at_forward_entry': 7, 'at_right_entry': 9}
+  OK    el cliente vio cada pulso en al menos 3 lecturas
+
+=== RESULTADO: 17 correctas, 0 fallidas ===
+exit 0

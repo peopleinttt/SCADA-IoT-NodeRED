@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "estado": "confirmado con la captura del driver (docs/capturas/driver_fio_parallels.png) y con vigila el 24 oct 2026, Factory I/O 2.5.10 en Parallels (10.211.55.3:502, Slave ID 1), escena Sorting by Weight. NC = normalmente cerrado: vale 1 sin caja o sin presionar, observado con vigila; Stop y Emergency stop confirmados al presionarlos el 11 nov 2026 (prueba_fio.py tablero, 9/9: bajan a 0 al presionar y vuelven a 1 al soltar). Bobinas 11 Reset y 12 Run agregadas por Ari el 24 oct (probadas por Modbus)",
+  "driver": {
+    "nombre": "Factory I/O 2.5.10, Modbus TCP/IP Server (puerto 502, Slave ID 1, offsets 0)",
+    "factor_escala": 100,
+    "limites": {
+      "bobina": 256,
+      "entrada_discreta": 256,
+      "registro_entrada": 64,
+      "registro_retencion": 64
+    }
+  },
+  "etiquetas": [
+    {
+      "nombre": "at_scale_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At scale entry: NC, baja a 0 cuando pasa una caja a la entrada de la bascula"
+    },
+    {
+      "nombre": "at_scale",
+      "tabla": "entrada_discreta",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At scale: caja sobre la bascula"
+    },
+    {
+      "nombre": "at_scale_exit",
+      "tabla": "entrada_discreta",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At scale exit: caja a la salida de la bascula"
+    },
+    {
+      "nombre": "at_left_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At left entry: caja entrando a la salida izquierda"
+    },
+    {
+      "nombre": "at_exit_left",
+      "tabla": "entrada_discreta",
+      "direccion": 4,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At exit left: NC, baja a 0 cuando sale una caja por la izquierda"
+    },
+    {
+      "nombre": "at_forward_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 5,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At forward entry: caja entrando a la salida de frente"
+    },
+    {
+      "nombre": "at_exit_front",
+      "tabla": "entrada_discreta",
+      "direccion": 6,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At exit front: NC, baja a 0 cuando sale una caja de frente"
+    },
+    {
+      "nombre": "at_right_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 7,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At right entry: caja entrando a la salida derecha"
+    },
+    {
+      "nombre": "at_exit_right",
+      "tabla": "entrada_discreta",
+      "direccion": 8,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "At exit right: NC, baja a 0 cuando sale una caja por la derecha"
+    },
+    {
+      "nombre": "start_button",
+      "tabla": "entrada_discreta",
+      "direccion": 9,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Start: boton del tablero, 1 al presionar"
+    },
+    {
+      "nombre": "reset_button",
+      "tabla": "entrada_discreta",
+      "direccion": 10,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Reset: boton del tablero"
+    },
+    {
+      "nombre": "stop_button",
+      "tabla": "entrada_discreta",
+      "direccion": 11,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Stop: boton del tablero, NC (1 sin presionar, 0 presionado; confirmado al presionarlo el 11 nov 2026)"
+    },
+    {
+      "nombre": "auto_mode",
+      "tabla": "entrada_discreta",
+      "direccion": 12,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Auto: selector del tablero"
+    },
+    {
+      "nombre": "fio_running",
+      "tabla": "entrada_discreta",
+      "direccion": 13,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "FACTORY I/O (Running): la simulacion esta en Play"
+    },
+    {
+      "nombre": "emergency_stop",
+      "tabla": "entrada_discreta",
+      "direccion": 14,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Emergency stop: NC (1 sin presionar, 0 presionado; confirmado al presionarlo y sostenerlo el 11 nov 2026)"
+    },
+    {
+      "nombre": "manual_mode",
+      "tabla": "entrada_discreta",
+      "direccion": 15,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Manual: selector del tablero"
+    },
+    {
+      "nombre": "weight",
+      "tabla": "registro_entrada",
+      "direccion": 0,
+      "tipo": "uint16",
+      "escala": 100,
+      "unidad": "V",
+      "rango_fisico": [
+        0,
+        10
+      ],
+      "sentido": "lectura",
+      "descripcion": "Weight: peso de la bascula (float x 100), 0-10 V = 0-20 kg (configuracion 20 Kg Max., docs/EVIDENCIA_U0.md); se asienta ~0.8 s despues de detener la banda"
+    },
+    {
+      "nombre": "entry_conveyor",
+      "tabla": "bobina",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Entry conveyor: banda de entrada"
+    },
+    {
+      "nombre": "load_scale",
+      "tabla": "bobina",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Load scale: banda de la bascula"
+    },
+    {
+      "nombre": "send_left",
+      "tabla": "bobina",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Send left: ruedas del desviador a la izquierda"
+    },
+    {
+      "nombre": "left_conveyor",
+      "tabla": "bobina",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Left conveyor: banda de la salida izquierda"
+    },
+    {
+      "nombre": "send_right",
+      "tabla": "bobina",
+      "direccion": 4,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Send right: ruedas del desviador a la derecha"
+    },
+    {
+      "nombre": "right_conveyor",
+      "tabla": "bobina",
+      "direccion": 5,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Right conveyor: banda de la salida derecha"
+    },
+    {
+      "nombre": "send_forward",
+      "tabla": "bobina",
+      "direccion": 6,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Send forward: ruedas del desviador de frente"
+    },
+    {
+      "nombre": "front_conveyor",
+      "tabla": "bobina",
+      "direccion": 7,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Front conveyor: banda de la salida de frente"
+    },
+    {
+      "nombre": "start_light",
+      "tabla": "bobina",
+      "direccion": 8,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Start light: luz del tablero"
+    },
+    {
+      "nombre": "reset_light",
+      "tabla": "bobina",
+      "direccion": 9,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Reset light: luz del tablero"
+    },
+    {
+      "nombre": "stop_light",
+      "tabla": "bobina",
+      "direccion": 10,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Stop light: luz del tablero"
+    },
+    {
+      "nombre": "fio_reset",
+      "tabla": "bobina",
+      "direccion": 11,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "FACTORY I/O (Reset): en 1 detiene y reinicia la escena (Running baja a 0); en 0 vuelve a correr"
+    },
+    {
+      "nombre": "fio_run",
+      "tabla": "bobina",
+      "direccion": 12,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "FACTORY I/O (Run): por nivel, 1 = la escena corre, 0 = se detiene (probado por Modbus el 24 oct)"
+    },
+    {
+      "nombre": "left_count",
+      "tabla": "registro_retencion",
+      "direccion": 0,
+      "tipo": "uint16",
+      "escala": 1,
+      "unidad": "cajas",
+      "rango_fisico": [
+        0,
+        65535
+      ],
+      "sentido": "escritura",
+      "descripcion": "Left count: contador del tablero (entero, sin escala)"
+    },
+    {
+      "nombre": "forward_count",
+      "tabla": "registro_retencion",
+      "direccion": 1,
+      "tipo": "uint16",
+      "escala": 1,
+      "unidad": "cajas",
+      "rango_fisico": [
+        0,
+        65535
+      ],
+      "sentido": "escritura",
+      "descripcion": "Forward count: contador del tablero (entero, sin escala)"
+    },
+    {
+      "nombre": "right_count",
+      "tabla": "registro_retencion",
+      "direccion": 2,
+      "tipo": "uint16",
+      "escala": 1,
+      "unidad": "cajas",
+      "rango_fisico": [
+        0,
+        65535
+      ],
+      "sentido": "escritura",
+      "descripcion": "Right count: contador del tablero (entero, sin escala)"
+    }
+  ]
+}

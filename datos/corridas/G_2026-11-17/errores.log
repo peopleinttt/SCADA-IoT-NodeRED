@@ -1,0 +1,2 @@
+2026-11-17T20:08:18.541Z;conexion_rechazada;GET telemetria.json;RequestError: connect ECONNREFUSED 127.0.0.1:9
+2026-11-17T20:08:18.541Z;conexion_rechazada;resume estado y arma prompt;lectura de telemetria fallida: HTTP ECONNREFUSED "RequestError: connect ECONNREFUSED 127.0.0.1:9 : http://127.0.0.1:9/plantas/planta_01/telemetria.json?orderBy=%22%24key%22&limitToLast=12"

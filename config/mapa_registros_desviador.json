@@ -1,0 +1,162 @@
+{
+  "version": 1,
+  "estado": "mapa del SUSTITUTO para la escena con desviador: los nombres son los de Sorting by Weight, las direcciones son de la simulacion y NO las de Factory I/O (esas llegan con la PUERTA ARI R0 en config/mapa_registros_fio.json)",
+  "driver": {
+    "nombre": "Sustituto de C2 con escena de desviador (Modbus TCP)",
+    "factor_escala": 100,
+    "limites": {
+      "bobina": 256,
+      "entrada_discreta": 256,
+      "registro_entrada": 64,
+      "registro_retencion": 64
+    }
+  },
+  "etiquetas": [
+    {
+      "nombre": "at_scale_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja a la entrada de la bascula"
+    },
+    {
+      "nombre": "at_scale_exit",
+      "tabla": "entrada_discreta",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja a la salida de la bascula"
+    },
+    {
+      "nombre": "at_left_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja entrando a la salida izquierda"
+    },
+    {
+      "nombre": "at_right_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja entrando a la salida derecha"
+    },
+    {
+      "nombre": "at_forward_entry",
+      "tabla": "entrada_discreta",
+      "direccion": 4,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja entrando a la salida de frente (solo en el sustituto)"
+    },
+    {
+      "nombre": "weight",
+      "tabla": "registro_entrada",
+      "direccion": 0,
+      "tipo": "uint16",
+      "escala": 100,
+      "unidad": "V",
+      "rango_fisico": [
+        0,
+        10
+      ],
+      "sentido": "lectura",
+      "descripcion": "Peso en la bascula, 0 a 10 V"
+    },
+    {
+      "nombre": "emitter",
+      "tabla": "bobina",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Emisor de cajas"
+    },
+    {
+      "nombre": "entry_conveyor",
+      "tabla": "bobina",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Banda de entrada y del desviador"
+    },
+    {
+      "nombre": "load_scale",
+      "tabla": "bobina",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Banda de la bascula"
+    },
+    {
+      "nombre": "send_left",
+      "tabla": "bobina",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Desviador hacia la izquierda"
+    },
+    {
+      "nombre": "send_right",
+      "tabla": "bobina",
+      "direccion": 4,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Desviador hacia la derecha"
+    },
+    {
+      "nombre": "send_forward",
+      "tabla": "bobina",
+      "direccion": 5,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Desviador de frente"
+    },
+    {
+      "nombre": "alarm_light",
+      "tabla": "bobina",
+      "direccion": 6,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Luz de alerta (solo en el sustituto)"
+    }
+  ]
+}

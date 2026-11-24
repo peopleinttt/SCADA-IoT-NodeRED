@@ -1,0 +1,42 @@
+[a2-seguridad] editor y API de administracion DESHABILITADOS (falta NODE_RED_ADMIN_USER y NODE_RED_ADMIN_HASH); flujos, dashboard, /a2/planta/* e ingesta siguen. Ver ./prepara_admin.sh
+17 Nov 13:11:09 - [info] 
+
+Welcome to Node-RED
+===================
+
+17 Nov 13:11:09 - [info] Node-RED version: v5.0.9
+17 Nov 13:11:09 - [info] Node.js  version: v22.23.3
+17 Nov 13:11:09 - [info] Darwin 27.0.0 arm64 LE
+17 Nov 13:11:09 - [info] Loading palette nodes
+17 Nov 13:11:10 - [info] Settings file  : /Users/ariarinunezm/dev aws/dev/IoT/node-red/settings.js
+17 Nov 13:11:10 - [info] Context store  : 'default' [module=memory]
+17 Nov 13:11:10 - [info] User directory : /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/actividad1-pruebas/userdir
+17 Nov 13:11:10 - [warn] Projects disabled : editorTheme.projects.enabled=false
+17 Nov 13:11:10 - [info] Flows file     : /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/actividad1-pruebas/userdir/flows.json
+17 Nov 13:11:10 - [info] Admin UI disabled
+17 Nov 13:11:10 - [info] Server now running at http://127.0.0.1:1881
+17 Nov 13:11:10 - [warn] 
+
+---------------------------------------------------------------------
+Your flow credentials file is encrypted using a system-generated key.
+
+If the system-generated key is lost for any reason, your credentials
+file will not be recoverable, you will have to delete it and re-enter
+your credentials.
+
+You should set your own key using the 'credentialSecret' option in
+your settings file. Node-RED will then re-encrypt your credentials
+file using your chosen key the next time you deploy a change.
+---------------------------------------------------------------------
+
+17 Nov 13:11:10 - [warn] Encrypted credentials not found
+17 Nov 13:11:10 - [info] Starting flows
+17 Nov 13:11:10 - [info] [ui-base:A2 Station] Node-RED Dashboard 2.0 (v1.34.0) started at /dashboard
+17 Nov 13:11:10 - [info] [ui-base:A2 Station] Created socket.io server bound to Node-RED port at path /dashboard/socket.io
+17 Nov 13:11:10 - [info] Started flows
+17 Nov 13:11:11 - [warn] [function:guarda idToken] Firebase: sesion de ingestor lista. UID = NCGRYv24iXc1BFSxD3RViIDeYRY2 (este es el UID que va en database.rules.json)
+17 Nov 13:11:30 - [warn] [function:resume estado y arma prompt] GEMINI_MAX_TOKENS=512 con razonamiento encendido: el modelo va a gastar el presupuesto pensando y devolver texto truncado. Pon GEMINI_THINKING_BUDGET=0 o sube el tope a 2048.
+17 Nov 13:13:29 - [info] [ui-base:A2 Station] Disconnected 8_47_RWzHPrWQPPkAAAA due to transport close
+17 Nov 13:16:01 - [info] [ui-base:A2 Station] Disconnected Iw4cvRo_ReoV5Ah5AAAB due to transport close
+17 Nov 13:18:25 - [info] Stopping flows
+17 Nov 13:18:27 - [info] Stopped flows

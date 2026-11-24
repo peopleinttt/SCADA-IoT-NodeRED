@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weight Sorting — Live Process</title>
+<style>
+  :root { --fg: #1c2024; --muted: #60646c; --bg: #f3f4f6; --card: #fff; --line: #d9d9e0; --ok: #18794e; --bad: #b42318; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, sans-serif; color: var(--fg); background: var(--bg); }
+  header { padding: 14px 16px; background: #1f2a37; color: #fff; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; }
+  header h1 { font-size: 20px; margin: 0; }
+  header .sub { color: #c9cdd4; font-size: 13px; }
+  main { padding: 12px 16px; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 12px; }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin: 0 0 8px; }
+  .chart { width: 100%; height: 320px; }
+  .kpis { display: flex; gap: 22px; flex-wrap: wrap; grid-column: 1 / -1; }
+  .kpi .n { font-size: 26px; font-weight: 700; } .kpi .c { font-size: 12px; color: var(--muted); }
+  #estado { font-size: 13px; } #estado.ok { color: #9be2b4; } #estado.err { color: #ffb4ab; }
+  .muted { color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Weight sorting station — live process</h1>
+  <span class="sub">Firebase <code id="rama">plantas/…/proceso</code> · updates without reloading</span>
+  <span id="estado">connecting…</span>
+</header>
+<main>
+  <div class="card kpis">
+    <div class="kpi"><div class="n" id="nCajas">0</div><div class="c">boxes recorded</div></div>
+    <div class="kpi"><div class="n" id="cpm">0</div><div class="c">boxes per minute (last minute)</div></div>
+    <div class="kpi"><div class="n" id="ultima">–</div><div class="c">last box (kg → destination)</div></div>
+    <div class="kpi"><div class="n" id="linea">–</div><div class="c">line state (last record)</div></div>
+  </div>
+  <div class="card"><h2>Mass per box, by destination</h2><div id="gMasa" class="chart"></div><div class="muted" id="notaUnidad" hidden></div></div>
+  <div class="card"><h2>Boxes per minute</h2><div id="gCpm" class="chart"></div></div>
+  <div class="card" style="grid-column: 1 / -1"><span class="muted" id="pie">–</span></div>
+</main>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="config_a2.js" onerror="window.CONFIG_A2 = null"></script>
+<script type="module">
+// Configuracion: web/config_a2.js (no se versiona; lo genera demo_a2.sh desde
+// .env con tools/genera_config_web.py). Solo la cuenta del VISOR, que las
+// reglas dejan leer y nada mas. Con ?emulador=1 usa los emuladores de RTDB y
+// Auth (pruebas/prueba_grafica.py).
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, connectAuthEmulator }
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getDatabase, ref, query, orderByKey, limitToLast, onValue, connectDatabaseEmulator }
+  from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+const q = new URLSearchParams(location.search);
+const EMU = q.get("emulador") === "1";
+const C = EMU ? {
+  firebase: { apiKey: "demo", authDomain: "demo-iot.firebaseapp.com", projectId: "demo-iot",
+              databaseURL: "http://127.0.0.1:9000?ns=fake-server" },  // Node-RED escribe sin ns: el emulador lo guarda en fake-server
+  visor: { correo: q.get("correo"), clave: q.get("clave") }, planta: q.get("planta") || "planta_01", muestras: 300
+} : window.CONFIG_A2;
+const $ = id => document.getElementById(id);
+const estado = (t, ok) => { $("estado").textContent = t; $("estado").className = ok === undefined ? "" : (ok ? "ok" : "err"); };
+window.__a2 = { actualizaciones: 0, registros: 0, cajas: 0, error: null };   // para la prueba
+const NOMBRE = { left: "Left", right: "Right", forward: "Forward", salida: "Exit", rechazo: "Rejected" };
+
+const CORTE_UNIDAD = "2026-11-11T00:00:00.000Z";
+let listos = false, datos = {};
+google.charts.load("current", { packages: ["corechart"], language: "en" });
+google.charts.setOnLoadCallback(() => { listos = true; pinta(); });
+
+function pinta() {
+  const filas = Object.keys(datos).sort().map(k => datos[k]).filter(Boolean);
+  const cajas = filas.filter(r => typeof r.caja_masa_kg === "number");
+  window.__a2.registros = filas.length; window.__a2.cajas = cajas.length;
+  $("nCajas").textContent = cajas.length;
+  const ahora = Date.now();
+  $("cpm").textContent = cajas.filter(r => ahora - Date.parse(r.ts_origen) < 60000).length;
+  const u = cajas[cajas.length - 1];
+  $("ultima").textContent = u ? `${u.caja_masa_kg.toFixed(2)} → ${NOMBRE[u.destino] || u.destino || "?"}` : "–";
+  // Paso U (fase 3): hasta el 11 nov 2026 caja_masa_kg iba a 1 kg por volt; desde
+  // entonces, a 2 kg por volt (bascula de 20 kg). Los registros viejos no se reescriben.
+  const viejas = cajas.filter(r => r.ts_origen < CORTE_UNIDAD).length;
+  window.__a2.viejas = viejas;
+  $("notaUnidad").hidden = !viejas;
+  $("notaUnidad").textContent = viejas ? `${viejas} box records before ${CORTE_UNIDAD.slice(0, 10)} used 1 kg per volt: their mass is half the real one (the scale is 20 kg at 10 V).` : "";
+  window.__a2.nota = $("notaUnidad").hidden ? "" : $("notaUnidad").textContent;
+  const ul = filas[filas.length - 1];
+  $("linea").textContent = ul ? ({ en_marcha: "running", detenida: "stopped", sin_comunicacion: "NO COMM", emergencia: "EMERGENCY STOP" }[ul.estado_linea] || ul.estado_linea) : "–";
+  $("pie").textContent = `${filas.length} records (${cajas.length} boxes, ${filas.length - cajas.length} heartbeats) · updated ${new Date().toLocaleTimeString()}`;
+  if (!listos) return;
+  // masa por caja, una serie por destino
+  const destinos = [...new Set(cajas.map(r => r.destino || "?"))].sort();
+  const t1 = new google.visualization.DataTable();
+  t1.addColumn("datetime", "time");
+  destinos.forEach(d => t1.addColumn("number", NOMBRE[d] || d));
+  cajas.forEach(r => {
+    const fila = [new Date(r.ts_origen)].concat(destinos.map(d => (r.destino || "?") === d ? r.caja_masa_kg : null));
+    t1.addRow(fila);
+  });
+  new google.visualization.ScatterChart($("gMasa")).draw(t1, {
+    legend: { position: "bottom" }, chartArea: { width: "85%", height: "72%" },
+    vAxis: { title: "mass (kg)" }, hAxis: { format: "HH:mm:ss" }, pointSize: 6 });
+  // cajas por minuto: cuantas cajas en cada minuto
+  const porMin = {};
+  cajas.forEach(r => { const m = Math.floor(Date.parse(r.ts_origen) / 60000); porMin[m] = (porMin[m] || 0) + 1; });
+  const t2 = new google.visualization.DataTable();
+  t2.addColumn("datetime", "minute"); t2.addColumn("number", "boxes / min");
+  Object.keys(porMin).sort().forEach(m => t2.addRow([new Date(Number(m) * 60000), porMin[m]]));
+  new google.visualization.ColumnChart($("gCpm")).draw(t2, {
+    legend: { position: "none" }, chartArea: { width: "85%", height: "72%" }, hAxis: { format: "HH:mm" },
+    vAxis: { minValue: 0 } });
+}
+
+(async () => {
+  if (!C) { estado("missing web/config_a2.js (run ./demo_a2.sh)", false); return; }
+  $("rama").textContent = `plantas/${C.planta}/proceso`;
+  try {
+    const app = initializeApp(C.firebase);
+    const auth = getAuth(app), bd = getDatabase(app);
+    if (EMU) { connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true }); connectDatabaseEmulator(bd, "127.0.0.1", 9000); }
+    await signInWithEmailAndPassword(auth, C.visor.correo, C.visor.clave);
+    const qp = query(ref(bd, `plantas/${C.planta}/proceso`), orderByKey(), limitToLast(C.muestras || 300));
+    onValue(qp, s => { datos = s.val() || {}; window.__a2.actualizaciones++; estado("live", true); pinta(); },
+            e => { window.__a2.error = String(e); estado("read denied: " + e.code, false); });
+  } catch (e) {
+    window.__a2.error = String(e);
+    estado("error: " + (e.code || e.message), false);
+  }
+})();
+</script>
+</body>
+</html>

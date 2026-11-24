@@ -1,0 +1,37 @@
+=== C9 contra Factory I/O (10.211.55.3) escribiendo en planta_01 de la base real; C8 con la grafica ===
+    reinicio de la escena en 10.211.55.3:502 (unidad 1)
+        0.0 s  11 bobinas de actuadores en 0
+        0.1 s  Reset = 1 -> running 0
+        0.4 s  Reset = 0
+        0.5 s  vacia: bascula, desviador, ramas y salidas libres, peso < 0.2 V
+        2.2 s  Run = 1 (se queda) -> running 1, sostenido 1 s
+  OK    escena reiniciada por Modbus (codigo 0)
+  OK    A2-Planta conecta con la escena
+  OK    limites factibles, T_ef de lo medido (55 ms)
+  OK    marcha -> 200
+node:internal/deps/undici/undici:15270
+      Error.captureStackTrace(err);
+            ^
+
+TypeError: fetch failed
+    at node:internal/deps/undici/undici:15270:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///Users/ariarinunezm/dev%20aws/dev/IoT/pruebas/cdp_mira.mjs:7:22 {
+  [cause]: Error: connect ECONNREFUSED 127.0.0.1:9334
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1638:16) {
+    errno: -61,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '127.0.0.1',
+    port: 9334
+  }
+}
+
+Node.js v22.23.3
+     0.5 min  cajas 5  por destino {'left': 3, 'forward': 2, 'right': 0}
+Traceback (most recent call last):
+  File "/Users/ariarinunezm/dev aws/dev/IoT/pruebas/corrida_c9_real.py", line 180, in <module>
+    main()
+  File "/Users/ariarinunezm/dev aws/dev/IoT/pruebas/corrida_c9_real.py", line 102, in main
+    time.sleep(30)
+KeyboardInterrupt

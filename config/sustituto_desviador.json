@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "estado": "provisional: escena de desviador de tres salidas, bandas de velocidad fija, hasta medir Sorting by Weight",
+  "escena": "desviador",
+  "semilla": 20261022,
+  "geometria_m": {
+    "emisor": -0.5,
+    "at_scale_entry": 0.0,
+    "bascula": [
+      0.3,
+      0.9
+    ],
+    "at_scale_exit": 1.2,
+    "desviador": 1.5,
+    "confirmacion": 0.6,
+    "fin_rama": 1.0
+  },
+  "caja": {
+    "largo_m": 0.4,
+    "hueco_min_m": 0.05
+  },
+  "velocidad_m_s": 0.2,
+  "emision_s": {
+    "min": 5.0,
+    "max": 6.5
+  },
+  "masa_kg": {
+    "distribucion": "normal",
+    "media": 10.0,
+    "sd": 2.0,
+    "min": 2.0,
+    "max": 18.0
+  },
+  "bascula": {
+    "plena_escala_kg": 20.0,
+    "tau_s": 0.3,
+    "ruido_V": 0.01
+  },
+  "refresco_s": 0,
+  "marca_s": 60
+}

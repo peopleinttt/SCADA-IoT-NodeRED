@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "estado": "provisional: cliente para la escena con desviador. Umbrales de clase tomados de la distribucion de masas del sustituto; con Factory I/O salen de los pesos que se observen con vigila",
+  "actuador": "desviador",
+  "roles": {
+    "entrada": "at_scale_entry",
+    "fin_bascula": "at_scale_exit",
+    "peso": "weight",
+    "velocidad": null,
+    "emisor": "emitter",
+    "alimentacion": [
+      "entry_conveyor",
+      "load_scale"
+    ],
+    "alerta": "alarm_light"
+  },
+  "desviador": {
+    "clases": [
+      {
+        "nombre": "light",
+        "hasta_kg": 8.5,
+        "salida": "send_left",
+        "confirma": "at_left_entry",
+        "destino": "left"
+      },
+      {
+        "nombre": "medium",
+        "hasta_kg": 11.5,
+        "salida": "send_forward",
+        "confirma": "at_forward_entry",
+        "destino": "forward"
+      },
+      {
+        "nombre": "heavy",
+        "hasta_kg": null,
+        "salida": "send_right",
+        "confirma": "at_right_entry",
+        "destino": "right"
+      }
+    ]
+  },
+  "sondeo_ms": 250,
+  "rtt_previsto_ms": 5,
+  "refresco_ms": 0,
+  "holgura_ms": 50,
+  "lecturas_por_ciclo_max": 2,
+  "escrituras_por_ciclo_max": 2,
+  "periodos_minimos": 3,
+  "lecturas_para_cambio": 2,
+  "comunicacion_timeout_ms": 2000,
+  "linea": {
+    "velocidad_fija_m_s": 0.2,
+    "alimentacion_m_s": 0.2,
+    "intervalo_emision_min_s": 5.0,
+    "largo_caja_m": 0.4,
+    "entrada_a_fin_bascula_m": 1.2,
+    "fin_bascula_a_confirmacion_m": 0.9,
+    "sensores": {
+      "at_scale_entry": {
+        "banda": "fija",
+        "v_m_s": 0.2,
+        "largo_activo_m": 0.4
+      },
+      "at_scale_exit": {
+        "banda": "fija",
+        "v_m_s": 0.2,
+        "largo_activo_m": 0.4
+      },
+      "at_left_entry": {
+        "banda": "fija",
+        "v_m_s": 0.2,
+        "largo_activo_m": 0.4
+      },
+      "at_right_entry": {
+        "banda": "fija",
+        "v_m_s": 0.2,
+        "largo_activo_m": 0.4
+      },
+      "at_forward_entry": {
+        "banda": "fija",
+        "v_m_s": 0.2,
+        "largo_activo_m": 0.4
+      }
+    }
+  },
+  "bascula": {
+    "plena_escala_kg": 20.0,
+    "banda_estable_V": 0.03,
+    "muestras_estables": 3,
+    "minimo_V": 0.2
+  },
+  "escenarios": [
+    {
+      "nombre": "local",
+      "sondeo_ms": 250,
+      "rtt_ms": 5,
+      "refresco_ms": 0
+    },
+    {
+      "nombre": "azure_medido_24oct",
+      "sondeo_ms": 500,
+      "rtt_ms": 1890,
+      "refresco_ms": 1000,
+      "nota": "rtt = p95 medido con sonda mide el 24 oct (mediana 753 ms); ~1 FPS"
+    },
+    {
+      "nombre": "local_1fps",
+      "sondeo_ms": 250,
+      "rtt_ms": 5,
+      "refresco_ms": 1000,
+      "lecturas_para_cambio": 1,
+      "nota": "Factory I/O a 1 FPS sin la latencia de Hong Kong (opcion B si Parallels tambien queda en ~1 FPS)"
+    }
+  ]
+}

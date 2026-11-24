@@ -1,0 +1,6 @@
+# Solo se necesita si se compila fuera del IDE web (wokwi-cli / VS Code).
+# En wokwi.com basta con diagram.json + sketch.ino + libraries.txt.
+[wokwi]
+version = 1
+firmware = ".pio/build/esp32doit-devkit-v1/firmware.bin"
+elf = ".pio/build/esp32doit-devkit-v1/firmware.elf"

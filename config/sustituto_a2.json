@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "estado": "provisional: geometria y constantes inventadas hasta medir la escena real de Factory I/O. Ajustadas en C4 para que cada sensor se vea 3 periodos con sondeo de 500 ms y 200 ms de ida y vuelta (tools/limites_planta.py)",
+  "semilla": 20261022,
+  "geometria_m": {
+    "emisor": -0.5,
+    "sens_entrada": 0.0,
+    "bascula": [
+      1.0,
+      1.4
+    ],
+    "inicio_banda_variable": 1.4,
+    "empujador": 2.0,
+    "sens_salida": 3.5,
+    "fin": 4.0
+  },
+  "caja": {
+    "largo_m": 0.4,
+    "hueco_min_m": 0.05
+  },
+  "alimentacion_m_s": 0.18,
+  "k_banda_m_s_por_V": 0.1,
+  "emision_s": {
+    "min": 5.0,
+    "max": 6.5
+  },
+  "masa_kg": {
+    "distribucion": "normal",
+    "media": 10.0,
+    "sd": 2.0,
+    "min": 2.0,
+    "max": 18.0
+  },
+  "bascula": {
+    "plena_escala_kg": 20.0,
+    "tau_s": 0.3,
+    "ruido_V": 0.01
+  },
+  "empujador": {
+    "carrera_s": 0.5,
+    "alcance": 0.5
+  },
+  "marca_s": 60
+}

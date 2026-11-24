@@ -1,0 +1,449 @@
+<title>Hoja de Rodaje · Actividad 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root{
+    --papel:#F1F3F2; --alto:#FFFFFF; --hueco:#E7EBEA;
+    --tinta:#16302E; --suave:#586A67; --tenue:#8A9996;
+    --linea:#D2DAD8; --linea-fuerte:#B6C2BF;
+    --senal:#A85400; --senal-suave:#F6EADD;
+    --ok:#1C6B58; --ok-suave:#E1EFEA;
+    --alerta:#9C2E1E; --alerta-suave:#F7E6E2;
+    --display:"Barlow Condensed",Impact,sans-serif;
+    --texto:"Source Serif 4",Georgia,serif;
+    --dato:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --papel:#0F1716; --alto:#161F1E; --hueco:#1C2725;
+      --tinta:#E3EAE8; --suave:#9AA9A6; --tenue:#71807D;
+      --linea:#283432; --linea-fuerte:#3A4846;
+      --senal:#E2913F; --senal-suave:#2A2015;
+      --ok:#57B399; --ok-suave:#132621;
+      --alerta:#DE7A66; --alerta-suave:#2B1815;
+    }
+  }
+  :root[data-theme="dark"]{
+    --papel:#0F1716; --alto:#161F1E; --hueco:#1C2725;
+    --tinta:#E3EAE8; --suave:#9AA9A6; --tenue:#71807D;
+    --linea:#283432; --linea-fuerte:#3A4846;
+    --senal:#E2913F; --senal-suave:#2A2015;
+    --ok:#57B399; --ok-suave:#132621;
+    --alerta:#DE7A66; --alerta-suave:#2B1815;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--papel); color:var(--tinta);
+    font-family:var(--texto); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .hoja{max-width:960px; margin:0 auto; padding:0 28px 96px}
+
+  /* ---------- cabecera ---------- */
+  header{padding:52px 0 28px; border-bottom:2px solid var(--tinta)}
+  .rotulo{
+    font-family:var(--display); font-weight:600; font-size:14px;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--senal);
+  }
+  h1{
+    font-family:var(--display); font-weight:700; font-size:clamp(40px,7vw,66px);
+    line-height:.98; margin:10px 0 14px; letter-spacing:-.005em;
+    text-wrap:balance; text-transform:uppercase;
+  }
+  .bajada{font-size:19px; color:var(--suave); margin:0; max-width:62ch}
+
+  .ficha{
+    display:grid; gap:1px; background:var(--linea);
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    border:1px solid var(--linea); margin:30px 0 0;
+  }
+  .ficha div{background:var(--alto); padding:13px 15px}
+  .ficha dt{
+    font-family:var(--display); font-size:12px; font-weight:600;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--tenue); margin:0;
+  }
+  .ficha dd{
+    margin:3px 0 0; font-family:var(--dato); font-size:15px;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- secciones ---------- */
+  section{margin:60px 0 0}
+  h2{
+    font-family:var(--display); font-weight:700; font-size:30px;
+    text-transform:uppercase; letter-spacing:.02em; margin:0 0 6px;
+    padding-bottom:8px; border-bottom:1px solid var(--linea-fuerte);
+  }
+  h2 .num{color:var(--senal); margin-right:12px}
+  .intro{color:var(--suave); margin:14px 0 26px; max-width:66ch}
+  h3{
+    font-family:var(--display); font-weight:600; font-size:21px;
+    text-transform:uppercase; letter-spacing:.04em; margin:34px 0 10px;
+  }
+  p{max-width:66ch}
+
+  /* ---------- lista de tomas ---------- */
+  .toma{
+    display:grid; grid-template-columns:76px 1fr; gap:0 22px;
+    border-top:1px solid var(--linea); padding:22px 0;
+  }
+  .toma:last-of-type{border-bottom:1px solid var(--linea)}
+  .carril{font-family:var(--display); line-height:1.25}
+  .carril .n{
+    font-size:34px; font-weight:700; color:var(--senal);
+    font-variant-numeric:tabular-nums; display:block;
+  }
+  .carril .dur{
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--tenue); font-family:var(--dato);
+  }
+  .toma h4{
+    font-family:var(--display); font-weight:600; font-size:23px;
+    margin:0 0 4px; letter-spacing:.01em;
+  }
+  .req{
+    display:inline-block; font-family:var(--dato); font-size:11px;
+    letter-spacing:.06em; text-transform:uppercase;
+    background:var(--hueco); color:var(--suave);
+    padding:3px 8px; border-radius:2px; margin-bottom:10px;
+  }
+  .campo{margin:12px 0 0}
+  .campo .et{
+    font-family:var(--display); font-size:12px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--tenue);
+    display:block; margin-bottom:2px;
+  }
+  .campo p{margin:0}
+  .decir{
+    border-left:3px solid var(--senal); padding:2px 0 2px 14px;
+    font-style:italic; color:var(--tinta);
+  }
+  .prueba{
+    background:var(--ok-suave); border:1px solid var(--ok);
+    color:var(--ok); padding:9px 13px; margin-top:12px;
+    font-family:var(--dato); font-size:13.5px; line-height:1.5;
+  }
+
+  /* ---------- código ---------- */
+  pre{
+    background:var(--alto); border:1px solid var(--linea);
+    border-left:3px solid var(--linea-fuerte);
+    padding:13px 15px; overflow-x:auto; margin:12px 0;
+    font-family:var(--dato); font-size:13.5px; line-height:1.6;
+  }
+  code{font-family:var(--dato); font-size:.9em; background:var(--hueco); padding:1px 5px}
+  pre code{background:none; padding:0; font-size:inherit}
+
+  /* ---------- tablas ---------- */
+  .tabla-env{overflow-x:auto; margin:18px 0}
+  table{border-collapse:collapse; width:100%; font-size:15px}
+  th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--linea); vertical-align:top}
+  th{
+    font-family:var(--display); font-size:12px; font-weight:600;
+    letter-spacing:.12em; text-transform:uppercase; color:var(--tenue);
+    border-bottom:1px solid var(--linea-fuerte); white-space:nowrap;
+  }
+  td.ruta{font-family:var(--dato); font-size:13px; white-space:nowrap}
+  td.num{font-family:var(--dato); font-variant-numeric:tabular-nums; text-align:right}
+
+  .marca{font-family:var(--dato); font-size:12px; letter-spacing:.04em; white-space:nowrap}
+  .marca.si{color:var(--ok)}
+  .marca.no{color:var(--senal)}
+
+  /* ---------- avisos ---------- */
+  .aviso{
+    background:var(--senal-suave); border-left:3px solid var(--senal);
+    padding:15px 18px; margin:22px 0;
+  }
+  .aviso strong{font-family:var(--display); text-transform:uppercase; letter-spacing:.06em; font-weight:600}
+  .aviso p{margin:5px 0 0}
+  .aviso p:first-child{margin-top:0}
+
+  ul,ol{max-width:66ch; padding-left:22px}
+  li{margin:7px 0}
+
+  footer{
+    margin-top:70px; padding-top:22px; border-top:2px solid var(--tinta);
+    color:var(--tenue); font-family:var(--dato); font-size:13px;
+  }
+  a{color:var(--senal)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--senal); outline-offset:3px}
+  @media (max-width:620px){
+    .toma{grid-template-columns:1fr; gap:8px}
+    .carril{display:flex; align-items:baseline; gap:10px}
+    .carril .n{font-size:26px}
+  }
+</style>
+
+<div class="hoja">
+
+<header>
+  <div class="rotulo">Actividad 1 · Mantenimiento predictivo</div>
+  <h1>Hoja de rodaje<br>y entrega</h1>
+  <p class="bajada">Qué grabar, en qué orden, y qué prueba cada toma. Después, el paquete completo de archivos y los números para la sección 5 del reporte.</p>
+
+  <dl class="ficha">
+    <div><dt>Duración objetivo</dt><dd>7–9 min</dd></div>
+    <div><dt>Tomas</dt><dd>8</dd></div>
+    <div><dt>Requisitos cubiertos</dt><dd>7 de 7</dd></div>
+    <div><dt>Pendiente</dt><dd>rama materiales</dd></div>
+  </dl>
+</header>
+
+<section>
+  <h2><span class="num">A</span>Antes de apretar grabar</h2>
+  <p class="intro">Cuatro cosas tienen que estar vivas al mismo tiempo. Si falta una, la toma correspondiente no se puede grabar.</p>
+
+<pre><code>cd ~/dev/IoT && ./estado.sh        # dice en qué paso vas</code></pre>
+
+  <div class="tabla-env">
+  <table>
+    <thead><tr><th>Pieza</th><th>Cómo levantarla</th><th>Cómo saber que está</th></tr></thead>
+    <tbody>
+      <tr><td>Node-RED</td><td class="ruta">./arranca.sh</td><td>panel Depurar dice <em>sesión lista</em></td></tr>
+      <tr><td>Túnel público</td><td class="ruta">./tunel.sh</td><td>imprime la URL de Cloudflare</td></tr>
+      <tr><td>Página</td><td class="ruta">./sirve_pagina.sh</td><td>localhost:8123 pinta la gráfica</td></tr>
+      <tr><td>Wokwi</td><td>botón Play</td><td>monitor serie muestra <code>[http] 201</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="aviso">
+    <p><strong>Si reiniciaste el túnel</strong></p>
+    <p>La URL de Cloudflare cambia en cada arranque y va escrita dentro del sketch. Corre <code>./prepara_wokwi.sh</code> y vuelve a pegar el sketch en Wokwi, o el ESP32 seguirá hablándole a una dirección muerta.</p>
+  </div>
+
+  <h3>Ventanas en pantalla</h3>
+  <p>Acomódalas antes de grabar, no durante. El orden de las tomas está pensado para saltar entre estas cuatro sin buscar nada:</p>
+  <ul>
+    <li><strong>Wokwi</strong> con el monitor serie desplegado y en modo texto, no plotter.</li>
+    <li><strong>Node-RED</strong> en <code>localhost:1881</code>, panel Depurar abierto a la derecha.</li>
+    <li><strong>Consola de Firebase</strong>, en Realtime Database.</li>
+    <li><strong>La página</strong> en <code>localhost:8123/index.html</code>.</li>
+  </ul>
+  <p>Y una terminal libre para los comandos de las tomas 6 y 8.</p>
+</section>
+
+<section>
+  <h2><span class="num">B</span>Las ocho tomas</h2>
+  <p class="intro">El orden importa: cada toma deja el sistema en el estado que necesita la siguiente. Las etiquetas indican qué requisito del enunciado queda demostrado.</p>
+
+  <div class="toma">
+    <div class="carril"><span class="n">01</span><span class="dur">40 s</span></div>
+    <div>
+      <h4>El emisor publicando</h4>
+      <div class="req">Requisito 1 · Wokwi</div>
+      <div class="campo"><span class="et">En pantalla</span>
+        <p>Wokwi corriendo. Se ve el circuito y el monitor serie escupiendo una línea cada cinco segundos.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">El ESP32 simulado lee el DHT22 por GPIO15 y el transmisor de vibración por el ADC1, arma el JSON con los cuatro campos del esquema y lo manda por POST cada cinco segundos. La marca de tiempo la pone el chip con su reloj sincronizado por NTP.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Señala una línea <code>[tx]</code> completa y luego el <code>[http] 201</code> que le sigue.</p></div>
+      <div class="prueba">Prueba: POST HTTP cada 5 s con los cuatro campos exigidos, y confirmación 201 del receptor.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">02</span><span class="dur">50 s</span></div>
+    <div>
+      <h4>Mover los sensores</h4>
+      <div class="req">Requisito 1 · sensores reales</div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Clic en la perilla del potenciómetro y sube con la flecha ↑ hasta pasar de 7.1 mm/s. Luego clic en el DHT22 y sube la temperatura. Por último, presiona la tecla <code>c</code> tres veces.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">La vibración viene de un transmisor analógico con salida ya acondicionada, de cero a cincuenta milímetros por segundo. Los ciclos los cuenta un interruptor de proximidad por interrupción, con antirrebote de veinte milisegundos.</p></div>
+      <div class="prueba">Prueba: los valores del JSON cambian con el hardware simulado. No son sintéticos.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">03</span><span class="dur">70 s</span></div>
+    <div>
+      <h4>Node-RED recibe y valida</h4>
+      <div class="req">Requisito 2 · ingesta</div>
+      <div class="campo"><span class="et">En pantalla</span>
+        <p>Pestaña <em>A1 · Ingesta</em>. Se ve la cadena completa: <code>http in</code> → validación → <code>HTTP Request POST</code>.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">Es un nodo http in recibiendo el POST, no un Modbus Read. La función valida que estén los cuatro campos con su tipo y su rango, y agrega ts_escritura con Intl.DateTimeFormat. El HTTP Request hace POST contra telemetria punto json, no PATCH, para que Firebase genere una clave nueva por evento.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Abre el nodo de validación y enseña el código. Luego el nodo HTTP Request, señalando que el método dice <strong>POST</strong>. Vuelve al panel Depurar y muestra los registros llegando en vivo.</p></div>
+      <div class="prueba">Prueba: http in, validación con rechazo, ts_escritura con Intl, y POST que genera registroId nuevo cada vez.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">04</span><span class="dur">80 s</span></div>
+    <div>
+      <h4>Las reglas de seguridad</h4>
+      <div class="req">Requisito 3 · Firebase</div>
+      <div class="campo"><span class="et">En pantalla</span>
+        <p>Consola de Firebase, pestaña <strong>Reglas</strong>. Se ven las reglas publicadas con los dos UID.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">La escritura anónima está bloqueada en toda la base. Solo el UID del ingestor puede escribir, y solo puede agregar: la condición data punto exists impide modificar o borrar lo ya escrito. La lectura está limitada a dos identidades. Y el esquema se valida del lado del servidor: tipo, rango y formato de las marcas de tiempo.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>En la terminal, provoca el rechazo en vivo:</p></div>
+<pre><code>cd ~/dev/IoT &amp;&amp; source .env
+curl "$FIREBASE_DB_URL/plantas/planta_01/telemetria.json"</code></pre>
+      <div class="campo"><p>Devuelve <code>{"error":"Permission denied"}</code>. <strong>Que falle es el éxito.</strong></p></div>
+      <div class="prueba">Prueba: escritura anónima imposible, lectura restringida, y el modo de prueba público apagado durante la grabación.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">05</span><span class="dur">80 s</span></div>
+    <div>
+      <h4>El diagnóstico con Gemini</h4>
+      <div class="req">Requisito 4 · capa de IA</div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Pestaña <em>A1 · Diagnóstico</em> en Node-RED. Clic en el cuadrito azul del nodo <em>cada 30 min</em> para dispararlo a mano.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">Lee las últimas doce muestras con limitToLast, arma un resumen del estado y lo manda a Gemini en el cuerpo contents, parts, text. La respuesta se parsea con JSON punto parse y se extrae candidates cero, content, parts cero, text. El resultado se guarda con POST en la rama de diagnósticos.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Abre el nodo de parseo y enseña el <code>JSON.parse</code>. Luego pasa a Firebase y muestra el diagnóstico recién escrito con sus seis campos.</p></div>
+      <div class="prueba">Prueba: cuerpo con contents/parts/text, parseo explícito, y escritura con texto_diagnostico, accion_prescrita, modelo y latencia_ms.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">06</span><span class="dur">70 s</span></div>
+    <div>
+      <h4>La página en vivo</h4>
+      <div class="req">Requisito 5 · visualización</div>
+      <div class="campo"><span class="et">En pantalla</span>
+        <p><code>localhost:8123/index.html</code> junto a Wokwi, las dos visibles a la vez.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Sube la perilla de vibración en Wokwi y <strong>no toques la página</strong>. Deja que la gráfica se mueva sola. Es la prueba de que no hay recarga.</p></div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">Es un LineChart de Google Charts con dos ejes. Se actualiza con el listener onValue de Firebase: la base empuja solo los cambios, no hay recarga ni sondeo. La página lee con una cuenta de solo lectura, y no tiene ninguna credencial de escritura.</p></div>
+      <div class="prueba">Prueba: Google Charts LineChart leyendo telemetría y último diagnóstico, actualizándose sin recargar.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">07</span><span class="dur">90 s</span></div>
+    <div>
+      <h4>Los errores, provocados a propósito</h4>
+      <div class="req">Requisito 6 · manejo de errores</div>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">Los casos no están solo contemplados: están provocados y medidos.</p></div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>Manda tres peticiones malas seguidas y enseña las tres respuestas distintas:</p></div>
+<pre><code>source .env
+# 1. clave equivocada
+curl -s -X POST http://localhost:1881/telemetria \
+  -H 'Content-Type: application/json' -H 'X-Ingest-Key: mala' -d '{}'
+
+# 2. falta un campo del esquema
+curl -s -X POST http://localhost:1881/telemetria \
+  -H 'Content-Type: application/json' -H "X-Ingest-Key: $INGEST_KEY" \
+  -d '{"ts_origen":"2026-08-25T22:00:00.000Z","temperatura_C":70}'
+
+# 3. temperatura fuera del rango del sensor
+curl -s -X POST http://localhost:1881/telemetria \
+  -H 'Content-Type: application/json' -H "X-Ingest-Key: $INGEST_KEY" \
+  -d '{"ts_origen":"2026-08-25T22:00:00.000Z","temperatura_C":200,
+       "vibracion_mm_s":4,"ciclos_acumulados":1}'</code></pre>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">Cada uno devuelve un motivo distinto y legible. Eso importa porque Firebase contesta exactamente el mismo error para ocho causas diferentes: lo medimos contra el emulador. Por eso Node-RED valida antes de escribir, donde el mensaje sí puede decir la verdad.</p></div>
+      <div class="prueba">Prueba: permiso denegado, saturación por lectura, error de parsing, sobrecarga de Gemini y tope de cuota — los cinco documentados en docs/ERRORES.md con la línea exacta.</div>
+    </div>
+  </div>
+
+  <div class="toma">
+    <div class="carril"><span class="n">08</span><span class="dur">60 s</span></div>
+    <div>
+      <h4>Los datos de la corrida</h4>
+      <div class="req">Requisito 7 · instrumentación</div>
+      <div class="campo"><span class="et">Qué hacer</span>
+        <p>En la terminal, exporta y analiza la corrida que acabas de grabar:</p></div>
+<pre><code>python3 tools/exporta_corrida.py --diagnosticos
+python3 tools/analiza_corrida.py datos/corrida_*.csv --md docs/corrida.md</code></pre>
+      <div class="campo"><span class="et">Qué dices</span>
+        <p class="decir">El archivo delimitado trae ts_origen y ts_escritura por registro. De ahí salen la latencia y la frecuencia efectiva de muestreo. La latencia se reporta con mediana y percentil noventa y cinco, no con promedio, porque la distribución tiene cola larga.</p></div>
+      <div class="prueba">Prueba: archivo delimitado con las dos marcas de tiempo, y las métricas calculadas con su definición escrita.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">C</span>Qué entregar</h2>
+  <p class="intro">Todo vive en <code>~/dev/IoT</code>. Esta es la correspondencia entre cada requisito del enunciado y el archivo que lo cumple.</p>
+
+  <div class="tabla-env">
+  <table>
+    <thead><tr><th>Requisito</th><th>Archivo</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Emisor Wokwi</td><td class="ruta">firmware/wokwi/sketch.ino<br>firmware/wokwi/diagram.json<br>firmware/wokwi/libraries.txt</td><td class="marca si">corriendo, 13/13 POST ok</td></tr>
+      <tr><td>2 · Ingesta Node-RED</td><td class="ruta">node-red/flows.json<br>node-red/funciones/*.js</td><td class="marca si">26/26 pruebas</td></tr>
+      <tr><td>3 · Reglas Firebase</td><td class="ruta">firebase/database.rules.json</td><td class="marca si">46/46 contra la base real</td></tr>
+      <tr><td>4 · Capa Gemini</td><td class="ruta">node-red/funciones/11–14</td><td class="marca si">diagnósticos escritos</td></tr>
+      <tr><td>5 · Página</td><td class="ruta">web/index.html</td><td class="marca si">leyendo datos reales</td></tr>
+      <tr><td>6 · Errores</td><td class="ruta">docs/ERRORES.md</td><td class="marca si">con línea exacta y receta</td></tr>
+      <tr><td>7 · Instrumentación</td><td class="ruta">tools/exporta_corrida.py<br>tools/analiza_corrida.py<br>docs/INSTRUMENTACION.md</td><td class="marca si">probado con datos reales</td></tr>
+      <tr><td>Rama materiales</td><td class="ruta">firebase/database.rules.json</td><td class="marca no">cerrada, espera pregunta 5</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Evidencia de verificación</h3>
+  <p>Si el reporte pide respaldar que las piezas funcionan, estos arneses son reproducibles y valen más que una captura:</p>
+
+  <div class="tabla-env">
+  <table>
+    <thead><tr><th>Arnés</th><th>Qué comprueba</th><th class="num">Casos</th></tr></thead>
+    <tbody>
+      <tr><td class="ruta">pruebas/prueba.sh</td><td>flujos completos con simulador local, sin gastar cuota</td><td class="num">26</td></tr>
+      <tr><td class="ruta">pruebas/prueba_reglas_real.py</td><td>reglas contra tu proyecto real de Firebase</td><td class="num">46</td></tr>
+      <tr><td class="ruta">pruebas/emulador/mide_errores.py</td><td>qué contesta la base ante cada forma de fallar</td><td class="num">9</td></tr>
+      <tr><td class="ruta">pruebas/mide_thinking.py</td><td>si apagar el razonamiento degrada el diagnóstico</td><td class="num">8</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Tres hallazgos que dan sustancia al reporte</h3>
+  <p>No son adorno: los tres salieron de medir, no de suponer, y cada uno cambió una decisión de diseño.</p>
+  <ol>
+    <li><strong>Firebase devuelve el mismo error para ocho causas distintas.</strong> UID equivocado, valor fuera de rango, campo extra, marca de tiempo mal formada… todos dan <code>401 Permission denied</code>, byte por byte. Por eso la validación se hace en Node-RED, antes de escribir. Medido en <code>pruebas/emulador/</code>.</li>
+    <li><strong>El razonamiento de Gemini rompía el diagnóstico.</strong> Con el tope de 512 tokens, el modelo gastaba 490 pensando y devolvía JSON truncado en los tres casos ambiguos probados. Apagado, la acción prescrita fue idéntica a la del modelo razonando, con un tercio de los tokens. El criterio de juicio se escribió antes de medir: <code>docs/medicion_thinking.md</code>.</li>
+    <li><strong>El ESP32 simulado no completa TLS contra ngrok.</strong> Con Cloudflare y con example.com sí. El síntoma era un <code>-1 connection refused</code>, que es el mismo código para DNS caído, TCP rechazado y TLS fallido — hasta separarlos, se depuraba a ciegas. Y el apretón de manos tarda 6.4 s, lo que obligó a reutilizar la conexión.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">D</span>Números para la sección 5</h2>
+  <p class="intro">Con las definiciones fijadas antes de medir. El detalle completo está en <code>docs/INSTRUMENTACION.md</code>.</p>
+
+<pre><code>latencia_i     = ts_escritura_i − ts_origen_i
+periodo_i      = ts_origen_i − ts_origen_(i−1)
+f_efectiva     = 1 / media(periodo_i)
+completitud    = recibidas / (ventana / periodo_nominal + 1)</code></pre>
+
+  <div class="aviso">
+    <p><strong>El supuesto que hay que declarar</strong></p>
+    <p>Las reglas impiden alterar un registro después de escrito, pero eso no garantiza que las marcas fueran ciertas al escribirse: el esquema las guarda como texto y las reglas solo saben comparar números contra <code>now</code>. Se confía en el reloj del ESP32 y en el del equipo con Node-RED, ambos por NTP. Lo que sí está garantizado es que nadie los cambió después.</p>
+    <p>La herramienta cubre el hueco por el otro lado: denuncia las latencias negativas y reporta el sesgo de reloj estimado en vez de esconderlo.</p>
+  </div>
+
+  <h3>Antes de exportar</h3>
+  <p>La rama <code>planta_01</code> trae muestras de prueba anteriores a tu corrida, y <code>planta_99</code> tiene los treinta registros de la suite de reglas. Para una corrida limpia, acota por tiempo:</p>
+<pre><code>python3 tools/exporta_corrida.py --desde 2026-08-25T23:00:00Z --diagnosticos</code></pre>
+  <p>O bórralas desde la consola de Firebase, que hace bypass de las reglas — desde la aplicación no se puede, porque los registros son inmutables por diseño.</p>
+</section>
+
+<section>
+  <h2><span class="num">E</span>Al terminar de grabar</h2>
+  <p class="intro">Dos cosas de higiene, ninguna urgente.</p>
+  <ol>
+    <li><strong>Rota la clave de ingesta.</strong> Los proyectos de Wokwi en el plan gratuito son públicos, y la clave va escrita dentro del sketch. Genera otra con <code>openssl rand -hex 24</code>, ponla en <code>.env</code>, reinicia Node-RED y regenera el sketch. Treinta segundos.</li>
+    <li><strong>Apaga el túnel</strong> con <code>pkill -f 'cloudflared tunnel'</code>. Mientras corra, tu Node-RED está expuesto a internet — protegido por la clave compartida, pero expuesto.</li>
+  </ol>
+</section>
+
+<footer>
+  ~/dev/IoT · guión de 8 tomas · 7 de 7 requisitos · rama materiales pendiente de la pregunta 5
+</footer>
+
+</div>

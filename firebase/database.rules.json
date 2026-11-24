@@ -1,0 +1,73 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "plantas": {
+      "$plantaId": {
+
+        "telemetria": {
+          ".read": "auth !== null && (auth.uid === '__UID_VISOR__' || auth.uid === '__UID_INGESTOR__')",
+          ".write": false,
+
+          "$registroId": {
+            ".write": "auth !== null && auth.uid === '__UID_INGESTOR__' && $plantaId.matches(/^planta_[0-9]{2}$/) && !data.exists() && newData.hasChildren(['ts_origen','ts_escritura','temperatura_C','vibracion_mm_s','ciclos_acumulados'])",
+
+            "ts_origen":    { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}Z$/)" },
+            "ts_escritura": { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}[+-][0-9]{2}:[0-9]{2}$/)" },
+            "temperatura_C":     { ".validate": "newData.isNumber() && newData.val() >= -40 && newData.val() <= 80" },
+            "vibracion_mm_s":    { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100" },
+            "ciclos_acumulados": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() % 1 === 0" },
+            "$otro": { ".validate": false }
+          }
+        },
+
+        "diagnosticos": {
+          ".read": "auth !== null && (auth.uid === '__UID_VISOR__' || auth.uid === '__UID_INGESTOR__')",
+          ".write": false,
+
+          "$diagnosticoId": {
+            ".write": "auth !== null && auth.uid === '__UID_INGESTOR__' && $plantaId.matches(/^planta_[0-9]{2}$/) && !data.exists() && newData.hasChildren(['ts','resumen_entrada','texto_diagnostico','accion_prescrita','modelo','latencia_ms'])",
+
+            "ts":                { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}[+-][0-9]{2}:[0-9]{2}$/)" },
+            "resumen_entrada":   { ".validate": "newData.isString() && newData.val().length <= 1000" },
+            "texto_diagnostico": { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 2000" },
+            "accion_prescrita":  { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 300" },
+            "modelo":            { ".validate": "newData.isString() && newData.val().length <= 120" },
+            "latencia_ms":       { ".validate": "newData.isNumber() && newData.val() >= 0" },
+            "$otro": { ".validate": false }
+          }
+        },
+
+        "proceso": {
+          ".read": "auth !== null && (auth.uid === '__UID_VISOR__' || auth.uid === '__UID_INGESTOR__')",
+          ".write": false,
+
+          "$registroId": {
+            ".write": "auth !== null && auth.uid === '__UID_INGESTOR__' && $plantaId.matches(/^planta_[0-9]{2}$/) && !data.exists() && newData.hasChildren(['ts_origen','ts_escritura','vel_banda_V','peso_V','cajas_acumuladas','estado_linea'])",
+
+            "ts_origen":        { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}Z$/)" },
+            "ts_escritura":     { ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[.][0-9]{3}[+-][0-9]{2}:[0-9]{2}$/)" },
+            "vel_banda_V":      { ".validate": "newData.isNumber() && newData.val() >= -10 && newData.val() <= 10" },
+            "peso_V":           { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 10" },
+            "caja_masa_kg":     { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 20" },
+            "cajas_acumuladas": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() % 1 === 0" },
+            "estado_linea":     { ".validate": "newData.isString() && newData.val().matches(/^(en_marcha|detenida|sin_comunicacion|reconectando|iniciando|emergencia)$/)" },
+            "destino":          { ".validate": "newData.isString() && newData.val().matches(/^(salida|rechazo|left|right|forward)$/)" },
+            "$otro": { ".validate": false }
+          }
+        },
+
+        "materiales": {
+          ".read": false,
+          ".write": false
+        },
+
+        "$otra_rama": {
+          ".read": false,
+          ".write": false
+        }
+      }
+    }
+  }
+}

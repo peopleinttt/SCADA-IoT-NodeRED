@@ -1,0 +1,6 @@
+# Lista de librerias para Wokwi — https://docs.wokwi.com/guides/libraries
+# Wokwi las instala desde el indice del Arduino Library Manager al compilar.
+# Wire, WiFi, HTTPClient y Preferences vienen en el core de ESP32: no se listan.
+
+DHT sensor library for ESPx@1.19
+ArduinoJson@7.4.3

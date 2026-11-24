@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "estado": "provisional: los nombres de las etiquetas de la escena se confirman despues",
+  "driver": {
+    "nombre": "Factory I/O, Modbus TCP/IP Server",
+    "factor_escala": 100,
+    "limites": {
+      "bobina": 256,
+      "entrada_discreta": 256,
+      "registro_entrada": 64,
+      "registro_retencion": 64
+    }
+  },
+  "etiquetas": [
+    {
+      "nombre": "sens_entrada",
+      "tabla": "entrada_discreta",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja a la entrada del tramo vigilado"
+    },
+    {
+      "nombre": "sens_bascula",
+      "tabla": "entrada_discreta",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja sobre la bascula"
+    },
+    {
+      "nombre": "sens_salida",
+      "tabla": "entrada_discreta",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Caja a la salida del tramo vigilado"
+    },
+    {
+      "nombre": "emp_lim_frontal",
+      "tabla": "entrada_discreta",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Empujador extendido"
+    },
+    {
+      "nombre": "emp_lim_trasero",
+      "tabla": "entrada_discreta",
+      "direccion": 4,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "lectura",
+      "descripcion": "Empujador retraido"
+    },
+    {
+      "nombre": "peso_V",
+      "tabla": "registro_entrada",
+      "direccion": 0,
+      "tipo": "uint16",
+      "escala": 100,
+      "unidad": "V",
+      "rango_fisico": [0, 10],
+      "sentido": "lectura",
+      "descripcion": "Peso en la bascula, 0 a 10 V"
+    },
+    {
+      "nombre": "emisor_on",
+      "tabla": "bobina",
+      "direccion": 0,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Emisor de cajas habilitado"
+    },
+    {
+      "nombre": "alimentacion_on",
+      "tabla": "bobina",
+      "direccion": 1,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Banda de alimentacion y bascula en marcha"
+    },
+    {
+      "nombre": "emp_extender",
+      "tabla": "bobina",
+      "direccion": 2,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Extension del empujador de rechazo"
+    },
+    {
+      "nombre": "luz_alerta",
+      "tabla": "bobina",
+      "direccion": 3,
+      "tipo": "bool",
+      "escala": null,
+      "unidad": null,
+      "rango_fisico": null,
+      "sentido": "escritura",
+      "descripcion": "Indicador de alerta"
+    },
+    {
+      "nombre": "vel_banda_V",
+      "tabla": "registro_retencion",
+      "direccion": 0,
+      "tipo": "int16",
+      "escala": 100,
+      "unidad": "V",
+      "rango_fisico": [-10, 10],
+      "sentido": "escritura",
+      "descripcion": "Velocidad del tramo vigilado, -10 a 10 V, en complemento a dos"
+    }
+  ]
+}

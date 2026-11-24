@@ -1,0 +1,30 @@
+=== A2-Planta contra Factory I/O (Node-RED -> 10.211.55.3:502; oraculo por 10.211.55.3:502; datos en /var/folders/6y/56sny62s59j98r894dbqq9y00000gn/T/a2_fio_cliente_j7ms1pl1) ===
+    reinicio de la escena en 10.211.55.3:502 (unidad 1)
+        0.0 s  11 bobinas de actuadores en 0
+        0.1 s  Reset = 1 -> running 0
+        0.4 s  Reset = 0
+        0.5 s  vacia: bascula, desviador, ramas y salidas libres, peso < 0.2 V
+        2.2 s  Run = 1 (se queda) -> running 1, sostenido 1 s
+  OK    escena reiniciada por Modbus: Reset, vacia y Run (codigo 0)
+  OK    A2-Planta conecta con la escena (com ok)
+  OK    limites factibles con sondeo 50 ms (T_ef 55 ms)
+  OK    marcha -> 200
+    ... 25 cajas fuera
+    ... 50 cajas fuera
+    ... 75 cajas fuera
+    ... 100 cajas fuera
+Traceback (most recent call last):
+  File "/Users/ariarinunezm/dev aws/dev/IoT/pruebas/prueba_fio.py", line 399, in <module>
+    cliente(x.host, x.puerto, x.segundos, x.cajas, x.materiales)
+  File "/Users/ariarinunezm/dev aws/dev/IoT/pruebas/prueba_fio.py", line 192, in cliente
+    d = o.lee_discretas(0, 16)
+  File "/Users/ariarinunezm/dev aws/dev/IoT/tools/modbus_tcp.py", line 86, in lee_discretas
+    return self._lee_bits(2, direccion, cantidad)
+  File "/Users/ariarinunezm/dev aws/dev/IoT/tools/modbus_tcp.py", line 74, in _lee_bits
+    r = self._pide(funcion, struct.pack(">HH", direccion, cantidad))
+  File "/Users/ariarinunezm/dev aws/dev/IoT/tools/modbus_tcp.py", line 63, in _pide
+    tid, _, largo, _ = struct.unpack(">HHHB", self._recibe(7))
+  File "/Users/ariarinunezm/dev aws/dev/IoT/tools/modbus_tcp.py", line 51, in _recibe
+    trozo = self._sock.recv(n - len(datos))
+ConnectionResetError: [Errno 54] Connection reset by peer
+exit 1
